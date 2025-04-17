@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { db } from './firebase';
 import { collection, getDocs, doc, updateDoc } from 'firebase/firestore';
-
+import { deleteDoc } from 'firebase/firestore';
+import './EditQuestionsPage.css';
 function EditQuestionsPage({ searchTerm }) {
   const [questions, setQuestions] = useState([]);
   const [editingId, setEditingId] = useState(null);
@@ -69,8 +70,19 @@ function EditQuestionsPage({ searchTerm }) {
     setEditingId(null);
   };
 
+  const handleDelete = async (id) => {
+    try {
+      await deleteDoc(doc(db, 'questionLibrary', id));
+      setQuestions(questions.filter(q => q.id !== id));
+      alert('تم حذف السؤال بنجاح!');
+    } catch (error) {
+      alert('خطأ في حذف السؤال: ' + error.message);
+    }
+  };
+
   return (
     <div className="edit-questions-page">
+       
       <h1>تعديل الأسئلة</h1>
       {filteredQuestions.length === 0 ? (
         <p>لا توجد أسئلة مطابقة...</p>
@@ -157,6 +169,7 @@ function EditQuestionsPage({ searchTerm }) {
                 <p>الإجابة الصحيحة: {question.correctAnswer}</p>
                 <p>مستخدم: {question.used ? 'نعم' : 'لا'}</p>
                 <button onClick={() => startEditing(question)}>تعديل</button>
+<button onClick={() => handleDelete(question.id)}>حذف</button>
               </div>
             )}
           </div>

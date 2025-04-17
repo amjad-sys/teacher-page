@@ -1,0 +1,5 @@
+.edit-questions-page input,
+.edit-questions-page select {
+  color: black !important;
+  background-color: white !important;
+}

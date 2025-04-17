@@ -167,7 +167,7 @@ body::before {
 
 .login-form {
   margin-top: 30px;
-  background: #f4f4f7;
+  background: #cacaca;
   padding: 30px;
   border-radius: 10px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
@@ -181,7 +181,7 @@ body::before {
   border: 2px solid rgb(239, 240, 241);
   border-radius: 5px;
   background: #fff;
-  color: #fff;
+  color: rgb(0, 0, 0);
   font-size: 16px;
 }
 
